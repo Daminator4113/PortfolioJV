@@ -10,6 +10,9 @@ function removeClassAfterDelay(element, className, delay) {
     }
 }
 
+// Check si la page est lu sur un petit écran comme un mobile
+const mobile = window.matchMedia('(max-width: 768px)');
+
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
     //------------------------------------------------------//
@@ -66,13 +69,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // Sélectionne toutes les images avec l'attribut data-width
     const manualResizeImages = document.querySelectorAll('.manual-resize');
 
-    // Applique la largeur personnalisée si l'attribut est défini
-    manualResizeImages.forEach(img => {
-        const width = img.getAttribute('data-width');
-        if (width) {
-            img.style.width = `${width}%`;
-        }
-    });
+    // Applique la largeur personnalisée si l'attribut est défini    
+    const resizeImages = () => {
+        manualResizeImages.forEach(img => {
+            const width = img.getAttribute('data-width');
+            if (width) {
+                img.style.width = mobile.matches
+                    // Si Mobile détecté, on overwright la taille des images par une valeur par defaut
+                    ? (img.classList.contains('pp') ? '' : '75%') // On exclue la pp dans le redimensionnement car elle est set dans le css
+                    // Sinon, on définis la taille selon le data-width
+                    : `${width}%`;
+            }
+        });
+    };
+
+    // Au chargement
+    resizeImages();
+    // Lors d'un changement de taille d'écran
+    mobile.addEventListener('change', resizeImages);
 
 
 
@@ -310,14 +324,30 @@ document.addEventListener('DOMContentLoaded', () => {
     //------------------------------------------------------//
     //   INVERSE CHAQUE PROJET EN LIGNE DANS MES JEUX
     //------------------------------------------------------//
-    const projectIntros = document.querySelectorAll('.project .project-intro');
+    const subSections = document.querySelectorAll('.section .container .sub-section');
 
-    projectIntros.forEach((intro, index) => {
-        // Alterne entre "row" et "row-reverse"
-        const flexDirection = index % 2 === 0 ? 'row' : 'row-reverse';
-        intro.style.display = 'flex';
-        intro.style.flexDirection = flexDirection;
-    });
+    const changeFlexDirections = () => {
+        subSections.forEach((sub_section) => {
+            const projectIntros = sub_section.querySelectorAll('.project .project-intro');
+
+            projectIntros.forEach((project_intro, project_index) => {
+                const flexDirection = mobile.matches
+                    // Si Mobile détecté, on met tout en column
+                    ? 'column'
+                    // Sinon, on alterne entre "row" et "row-reverse"
+                    : (project_index % 2 === 0 ? 'row' : 'row-reverse');
+
+                project_intro.style.display = 'flex';
+                project_intro.style.flexDirection = flexDirection;
+            });
+        });
+    };
+
+    // Au chargement
+    changeFlexDirections();
+
+    // Lors d'un changement de taille d'écran
+    mobile.addEventListener('change', changeFlexDirections);
 
 
 

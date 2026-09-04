@@ -906,3 +906,35 @@ Special styles for websites
 .folioscope:hover {
     background-color: #aaa;
 }
+
+
+
+
+/*-------------------------
+Responsive, for small screens
+---------------------------*/
+@media (max-width: 768px) {
+    .container {
+        max-width: 100%;
+    }
+    .details p {
+        width: 100%;
+    }
+    .container .description {
+        width: 100%;
+    }
+    .profile-container {
+        flex-direction: column;
+    }
+    .pp {
+        width: 50%;
+    }
+    /* set in script.js
+    .project-intro {
+        flex-direction: column;
+    }
+    .manual-resize {
+        width: 75%;
+    }
+    */
+}
