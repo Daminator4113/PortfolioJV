@@ -917,18 +917,25 @@ Responsive, for small screens
     .container {
         max-width: 100%;
     }
+    .container .description {
+        width: 100%;
+    }
+    .pp {
+        width: 50%;
+    }
+    .top-title {
+        padding-top: 25%;
+    }
     .details p {
         width: 100%;
     }
-    .container .description {
+    #creations p {
         width: 100%;
     }
     .profile-container {
         flex-direction: column;
     }
-    .pp {
-        width: 50%;
-    }
+
     /* set in script.js
     .project-intro {
         flex-direction: column;
