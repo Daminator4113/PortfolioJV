@@ -846,6 +846,18 @@ nav.footer ul li{
     transform: translateY(-3px);
 }
 
+.btn-link[backup] {
+    padding: 5px 20px;
+    background-color: #333;
+    font-weight: normal;
+    font-size: 16px;
+    margin: 15px auto;
+}
+
+.btn-link[backup]:hover {
+    background-color: #444;
+}
+
 .btn-anim{
     margin: 0 auto; /* Centre l'image */
     animation: subtle-rotate 5s ease-in-out infinite; /* Animation continue */
